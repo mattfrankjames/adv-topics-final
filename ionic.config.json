@@ -1,0 +1,7 @@
+{
+  "name": "ionicGram",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
