@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-class-center"> Activity </ion-title>
+  </ion-toolbar>
+  <ion-row>
+    <ion-slides [options]="slideOptions">
+      <ion-slide *ngFor="let item of slides; let i = index">
+        <ion-col (click)="changeTab(i)">
+          <ion-fab
+            vertical="top"
+            horizontal="center"
+            *ngIf="item?.notifications"
+          >
+            <ion-fab-button color="danger"
+              >{{item?.notifications}}</ion-fab-button
+            >
+          </ion-fab>
+          <ion-button
+            [class.active-tab]="activeTab === i"
+            [color]="activeTab === i ? 'dark': 'white'"
+            expand="block"
+            mode="ios"
+            shape="round"
+            ><ion-text> {{item?.name}} </ion-text></ion-button
+          >
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 4</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-explore-container name="Tab 4 page"></app-explore-container> -->
+  <ion-list lines="none" *ngIf="activeTab===0">
+    <ion-list-header>
+      <ion-label>
+        <strong>New (64)</strong>
+      </ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let item of activities">
+      <ion-thumbnail slot="start" class="photo">
+        <img [src]="item?.userProfile" [alt]="item.username" />
+      </ion-thumbnail>
+      <ion-label>
+        <span>{{item?.username}}</span>
+        <p class="ion-text-wrap">
+          <ion-text color="medium" *ngIf="item?.activity === 'follow'">
+            started following you.
+          </ion-text>
+          <ion-text color="medium" *ngIf="item?.activity === 'comment'">
+            <span>Commented: </span>{{item?.comments}}
+          </ion-text>
+          <ion-text class="time">{{item?.time}}</ion-text>
+        </p>
+        <ion-row *ngIf="item?.activity === 'comment'">
+          <ion-icon
+            [class.like]="item?.like"
+            (click)="likeComment(item)"
+            [color]="item?.like ? 'primary' : 'medium'"
+            [name]="item?.like ? 'heart' : 'heart-outline'"
+          ></ion-icon>
+          <ion-icon
+            color="medium"
+            class="ion-margin-start"
+            name="chatbubble-ellipses-outline"
+          ></ion-icon>
+        </ion-row>
+      </ion-label>
+      <ion-button
+        *ngIf="item?.activity === 'follow'"
+        mode="ios"
+        slot="end"
+        color="primary"
+        >Follow back</ion-button
+      >
+      <ion-thumbnail
+        *ngIf="item?.activity === 'comment'"
+        slot="end"
+        class="post"
+      >
+        <img [src]="item?.post" alt="" />
+      </ion-thumbnail>
+    </ion-item>
+  </ion-list>
+</ion-content>
