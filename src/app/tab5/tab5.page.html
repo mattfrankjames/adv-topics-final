@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title color="dark" mode="md">
-      Tab 5<ion-icon name="arrow-down"></ion-icon>
+      Ionic - gram<ion-icon name="arrow-down"></ion-icon>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" color="dark">
@@ -130,6 +130,7 @@
     <ion-list lines="none" *ngSwitchCase="'grid'" class="photo-grid">
       <div *ngFor="let item of posts; let i = index">
         <ion-grid *ngIf="i%3 === 0" class="noPadding">
+          <button (click)="shareItem(item, i)">Share</button>
           <ion-row *ngIf="i%9 === 0">
             <ion-col size="8">
               <!-- <div

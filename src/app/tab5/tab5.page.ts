@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 @Component({
   selector: 'app-tab5',
   templateUrl: 'tab5.page.html',
@@ -11,7 +11,7 @@ export class Tab5Page implements OnInit {
   buttonValue = 'grid';
   buttonItems: any[] = [];
   posts: any[] = [];
-  constructor() {}
+  constructor(public socialSharing: SocialSharing) {}
   ngOnInit() {
     this.stories = [
       { name: 'New' },
@@ -65,5 +65,18 @@ export class Tab5Page implements OnInit {
   }
   buttonsChanged(event) {
     this.buttonValue = event.detail.value;
+  }
+  shareItem(item, index) {
+    console.log('sharing item - ', item, index);
+    const message = 'Share this image';
+    const subject = 'Shared with IonicGram';
+    this.socialSharing
+      .share(message, subject)
+      .then(() => {
+        console.log('Shared successfully');
+      })
+      .catch((error) => {
+        console.error('error whil sharing', error);
+      });
   }
 }
